@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #343a40;
+      color: white;
+    }
+    .card {
+      background-color: #212529;
+      color: white;
+    }
+    .weather-info {
+      display: flex;
+      align-items: center;
+    }
+    .weather-info img {
+      margin-left: auto;
+      max-width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center">Weather App</h1>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-6">
+        <form id="weatherForm">
+          <div class="form-group">
+            <label for="locationInput">Enter Location:</label>
+            <input type="text" class="form-control" id="locationInput" placeholder="Enter city name">
+          </div>
+          <button type="submit" class="btn btn-primary">Get Weather</button>
+        </form>
+      </div>
+    </div>
+    <div id="weatherResults" class="row justify-content-center mt-4" style="display: none;">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="weather-info">
+              <div>
+                <h5 id="locationName"></h5>
+                <h6 id="currentTemp"></h6>
+                <p id="condition"></p>
+              </div>
+              <img id="weatherIcon" src="" alt="Weather Icon">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#weatherForm').submit(function(event) {
+        event.preventDefault();
+        var location = $('#locationInput').val();
+        getWeather(location);
+      });
+
+      function getWeather(location) {
+        var apiKey = '87db076306b44e12b76104626232306';
+        var apiUrl = 'https://api.weatherapi.com/v1/current.json?key=' + apiKey + '&q=' + location;
+
+        $.ajax({
+          url: apiUrl,
+          method: 'GET',
+          success: function(response) {
+            displayWeather(response);
+          },
+          error: function() {
+            alert('Error fetching weather data. Please try again.');
+          }
+        });
+      }
+
+      function displayWeather(data) {
+        $('#locationName').text(data.location.name);
+        $('#currentTemp').text('Current Temperature: ' + data.current.temp_c + '°C');
+        $('#condition').text('Condition: ' + data.current.condition.text);
+        $('#weatherIcon').attr('src', data.current.condition.icon);
+        $('#weatherResults').show();
+      }
+    });
+  </script>
+</body>
+</html>
