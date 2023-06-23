@@ -1,4 +1,4 @@
-# This is my weather api application! -> [Check it out](https://ivank17.github.io/weather-api-application/)
+# This is my weather api application! -> [Check it out](http://stackoverflow.com){:target="_blank"}
 
 ## Author
 - Ivan Karev [IvanK17](https://github.com/IvanK17)
