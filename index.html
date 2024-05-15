@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,20 +11,24 @@
       background-color: #343a40;
       color: white;
     }
+
     .card {
       background-color: #212529;
       color: white;
     }
+
     .weather-info {
       display: flex;
       align-items: center;
     }
+
     .weather-info img {
       margin-left: auto;
       max-width: 100px;
     }
   </style>
 </head>
+
 <body>
   <div class="container mt-5">
     <h1 class="text-center">Weather App</h1>
@@ -59,8 +64,8 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $('#weatherForm').submit(function(event) {
+    $(document).ready(function () {
+      $('#weatherForm').submit(function (event) {
         event.preventDefault();
         var location = $('#locationInput').val();
         getWeather(location);
@@ -73,10 +78,10 @@
         $.ajax({
           url: apiUrl,
           method: 'GET',
-          success: function(response) {
+          success: function (response) {
             displayWeather(response);
           },
-          error: function() {
+          error: function () {
             alert('Error fetching weather data. Please try again.');
           }
         });
@@ -92,4 +97,5 @@
     });
   </script>
 </body>
+
 </html>
